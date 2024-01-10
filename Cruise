@@ -1,0 +1,50 @@
+Ferry {
+	id integer pk increments
+	name string
+	description string
+}
+
+Сruise {
+	id integer pk increments
+	ferry_id integer > Ferry.id
+	port_departure integer > Port.id
+	port_arrival integer > Port.id
+	departure_datetime datetime
+	arrival_datetime datetime
+}
+
+Port {
+	id integer pk increments
+	name string
+	address string
+}
+
+Services {
+	id integer pk increments
+	name string
+	description string
+	cabin_type_id integer > Cabin_type.id
+}
+
+Cabin {
+	id integer pk increments
+	deck string
+	number integer
+	price integer
+	cabin_type_id integer > Cabin_type.id
+	farry_id integer > Ferry.id
+}
+
+Cabin_type {
+	id integer pk increments
+	name string
+	description string
+	place_count integer
+}
+
+Ticket {
+	id integer pk increments
+	cruise_id integer > Сruise.id
+	cabin_id integer > Cabin.id
+	qr_code binary
+}
